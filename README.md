@@ -63,7 +63,7 @@ git merge --abort # to cancel the entire merging process (maybe it's easier to t
 ```
 Then commit and push as usual.
 
-Note: There must be a better way.
+Note: There must be a better way. Fork?
 
 
 
