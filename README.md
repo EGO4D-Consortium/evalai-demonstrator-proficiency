@@ -1,6 +1,6 @@
 ## Challenge setup
 
-A repo and associated EvalAI challenge page will be created (and pre-configured) for each benchmark. Each POC needs to modify and push a series of challenge specific files. Important: push all changes to the challenge branch (not main).
+A repo and associated EvalAI challenge page will be created (and pre-configured) for each benchmark. Each POC needs to modify and push a series of challenge specific files. 
 
 ```
 ├── annotations                                 # Contains the annotations for Dataset splits
@@ -27,29 +27,32 @@ EvalAI website
  
 `EvalAI website/`: A series of files that describe the challenge, prizes, evaluation details, T&C etc. These are html files so there’s plenty of flexibility about what goes in here, but please try and keep the overall structure uniform across challenges following the template (e.g., Ego4d logo placement, challenge logo, Goal -> Task -> Prizes structure etc.)
  
-See the long-term anticipation benchmark repo and what this looks like on the EvalAI website.
+#### Create challenge repo:
+Create a new repo for your challenge, cloning the contents of this repo. [This repo](https://github.com/EGO4D-Consortium/evalai-base) is an Ego4D specific template (of an existing [EvalAI template](https://github.com/Cloud-CV/EvalAI-Starters)) and contains common configuration details and challenge html templates that every challenge repo should have for consistency. Each challenge repo should ensure that they are synced with this base repo before pushing changes.
 
-## Testing and development
+#### Setup EvalAI <--> github access:
+Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedocs.io/en/latest/host_challenge.html) to allow EvalAI to read from this repo.
+
+#### Make changes for your benchmark:
+Edit the list of files above, tailoring it to your benchmark. Please stick to the structure laid out in the template html files. Push all changes to the challenge branch (not main). 
+After pushing, check the actions tab on github. If everything went well, the build would have succeeded. A successful build = changes show up on EvalAI challenge website.
+
+## Testing and Development
 EvalAI docs: https://evalai.readthedocs.io/en/latest/
 
-##### Base repo:
-[This repo](https://github.com/EGO4D-Consortium/evalai-base) contains common configuration details and challenge html templates that every challenge repo should have for consistency. Each challenge repo should ensure that they are synced with this base repo before pushing changes. You can pull from an external repo using this command, and then merge changes to the corresponding `challenge` branch.
-```
-git pull git@github.com:EGO4D-Consortium/evalai-base.git master:master
-```
-
-##### After pushing:
-Check the actions tab on github. If everything went well, the build would have succeeded. A successful build = changes show up on EvalAI challenge website.
-
-##### Test evaluation script locally: 
+#### Test evaluation script locally: 
 Link files in your evaluation directory into the local challenge dir 
 ```
 ln -s $PWD/evaluation_script/* challenge_data/challenge_1/
 ```
-
 Run worker. The user submission is submission.json in the root dir. This is exactly the same job that will be run on EvalAI worker nodes so if it succeeds here, it should run there as well.
 ```
 python -m worker.run
 ```
 
+#### Sync with base repo:
+You can pull from an external repo using this command, and then merge changes to the corresponding `challenge` branch.
+```
+git pull git@github.com:EGO4D-Consortium/evalai-base.git master:master
+```
 
