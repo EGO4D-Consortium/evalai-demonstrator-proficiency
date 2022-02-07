@@ -51,8 +51,19 @@ python -m worker.run
 ```
 
 #### Sync with base repo:
-You can pull from an external repo using this command, and then merge changes to the corresponding `challenge` branch.
+You can pull from the external repo using this command. 
 ```
-git pull git@github.com:EGO4D-Consortium/evalai-base.git master:master
+git pull git@github.com:EGO4D-Consortium/evalai-base.git master --no-rebase --allow-unrelated-histories
 ```
+This will result in several merge conflicts that need to be resolved.
+```
+git checkout HEAD <file> # Retain the challenge repo's file
+git add <file> # accept the external repo's change
+git merge --abort # to cancel the entire merging process (maybe it's easier to to this manually)
+```
+Then commit and push as usual.
+
+Note: There must be a better way.
+
+
 
