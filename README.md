@@ -30,7 +30,7 @@ EvalAI website
 
 ## Steps to be taken by challenge POCs
 
-### Create challenge repo:
+### Step 1: Create challenge repo
 
 
 1. Create a new **empty** repo for your challenge in the `https://github.com/EGO4D-Consortium` organization. The name of the repo should be `evalai-<your challenge short name>-challenge`. For example, the "Short-Term Anticipation (STA)" challenge will name their repo `evalai-sta-challenge`. Lets call the name of this repo as `$CHALLENGE_REPO_NAME`.
@@ -68,14 +68,22 @@ $ git push origin challenge
 
 Viola! You challenge will be rebuilt and updated with the latest updates on the base repo.
 
-### Setup EvalAI <--> github access:
-Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedocs.io/en/latest/host_challenge.html) to allow EvalAI to read from this repo.
+### Step 2: Setup EvalAI <--> github access
+Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedocs.io/en/latest/host_challenge.html) to allow EvalAI to read from this repo. I recap them here:
 
-#### Make changes for your benchmark:
+1. Create a [github personal acccess token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and copy it in clipboard.
+2. For the your repo, go to Settings, select "Secrets" from the sidebar, click on "Actions", create a "New Repository Secret". Make a token with name "AUTH_TOKEN", and copy your github personal access token into the text box.
+3. Now go to `github/host_config.json` in your repo, and update the 3 values in there:
+   - `evalai_user_auth_token` - Go to [profile page](https://eval.ai/web/profile) after logging in and click on `Get your Auth Token` to copy your auth token.
+   - `host_team_pk` - Go to [host team page](https://eval.ai/web/challenge-host-teams) and copy the `ID` for the team you want to use for challenge creation. Create a new team if no team exists there and then copy its ID.
+   - `evalai_host_url` - Use https://eval.ai for production server and https://staging.eval.ai for staging server.
+
+
+### Step 3: Make changes for your benchmark
 Edit the list of files above, tailoring it to your benchmark. Please stick to the structure laid out in the template html files. Push all changes to the challenge branch (not main).
 After pushing, check the actions tab on github. If everything went well, the build would have succeeded. A successful build = changes show up on EvalAI challenge website.
 
-## Testing and Development
+### Testing and Development
 EvalAI docs: https://evalai.readthedocs.io/en/latest/
 
 #### Test evaluation script locally:
