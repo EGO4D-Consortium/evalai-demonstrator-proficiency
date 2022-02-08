@@ -2,8 +2,8 @@
 # - title, short_description, leaderboard_description: fill with respective benchmark details
 # - leaderboard: replace with relevant benchmark metrics. See LTA challenge repo for examples.
 
-title: Random Number Generator Challenge
-short_description: Random number generation challenge for each submission
+title: "Ego4D: <your challenge name>"
+short_description: "Ego4D challenge on <your challenge description>"
 description: templates/description.html
 evaluation_details: templates/evaluation_details.html
 terms_and_conditions: templates/terms_and_conditions.html
