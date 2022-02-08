@@ -84,7 +84,7 @@ After pushing, check the actions tab on github. If everything went well, the bui
 ### Step 4: Testing and Development
 EvalAI docs: https://evalai.readthedocs.io/en/latest/
 
-#### Step 5: Test evaluation script locally:
+### Step 5: Test evaluation script locally:
 Link files in your evaluation directory into the local challenge dir
 ```
 ln -s $PWD/evaluation_script/* challenge_data/challenge_1/
