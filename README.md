@@ -45,17 +45,24 @@ $ # now change the remote "origin" to your new repo, and keep the base repo as "
 $ git remote rm origin
 $ git remote add origin git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git
 $ git remote add upstream git@github.com:EGO4D-Consortium/evalai-base.git
-$ git push --set-upstream origin master
+$ git push --set-upstream origin challenge
 ```
 
 And you are all set! This repo will have all the good stuff from the base repo, and has base set as upstream, so whenver things change upstream, you will be able to fetch and merge in changes, as follows:
 
 #### Sync-ing your repo to the upstream
 
-This will be required to be done whenver @rohitgirdhar (or anyone controlling the base repo) changes something like challenge start/end dates, high-level templates, terms and conditions etc. Those fields are supposed to be only controlled by the base repo and you should not edit them yourself (or risk running into merge conflicts!!) Here is how you can update your repo to the base repo when asked:
+This will be required to be done whenever @rohitgirdhar (or anyone controlling the base repo) changes something like challenge start/end dates, high-level templates, terms and conditions etc. Those fields are supposed to be only controlled by the base repo and you should not edit them yourself (or risk running into merge conflicts!!) Here is how you can update your repo to the base repo when asked:
 
 ```
+$ git remote -v  # Check your remotes are setup correctly; it should look something like this
+origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (fetch)
+origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (push)
+upstream	git@github.com:EGO4D-Consortium/evalai-base.git (fetch)
+upstream	git@github.com:EGO4D-Consortium/evalai-base.git (push)
+$ git fetch upstream
 ```
+
 
 ### Setup EvalAI <--> github access:
 Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedocs.io/en/latest/host_challenge.html) to allow EvalAI to read from this repo.
