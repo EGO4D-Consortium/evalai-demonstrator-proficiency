@@ -110,4 +110,4 @@ $ # Ideally there shouldn't be any merge conflicts. If there are, fix them (you 
 $ git push origin challenge
 ```
 
-Viola! You challenge will be rebuilt and updated with the latest updates on the base repo.
+You challenge will be rebuilt and updated with the latest updates on the base repo.
