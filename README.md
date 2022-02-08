@@ -48,7 +48,7 @@ $ git remote add upstream git@github.com:EGO4D-Consortium/evalai-base.git
 $ git push --set-upstream origin challenge
 ```
 
-And you are all set! This repo will have all the good stuff from the base repo, and has base set as upstream, so whenver things change upstream, you will be able to fetch and merge in changes, as follows:
+And you are all set! This repo will have all the good stuff from the base repo, and has base set as upstream, so whenever things change upstream, you will be able to fetch and merge in changes, as follows:
 
 #### Sync-ing your repo to the upstream
 
@@ -61,8 +61,12 @@ origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (push)
 upstream	git@github.com:EGO4D-Consortium/evalai-base.git (fetch)
 upstream	git@github.com:EGO4D-Consortium/evalai-base.git (push)
 $ git fetch upstream
+$ git rebase upstream/challenge
+$ # Ideally there shouldn't be any merge conflicts. If there are, fix them (you likely changed something that should only be changed in base)
+$ git push origin challenge
 ```
 
+Viola! You challenge will be rebuilt and updated with the latest updates on the base repo.
 
 ### Setup EvalAI <--> github access:
 Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedocs.io/en/latest/host_challenge.html) to allow EvalAI to read from this repo.
@@ -83,23 +87,3 @@ Run worker. The user submission is submission.json in the root dir. This is exac
 ```
 python -m worker.run
 ```
-
-#### Sync with base repo:
-You can pull from the external repo using this command.
-```
-git pull git@github.com:EGO4D-Consortium/evalai-base.git master --no-rebase --allow-unrelated-histories
-```
-This will result in several merge conflicts that need to be resolved.
-```
-git checkout HEAD <file> # Retain the challenge repo's file
-git add <file> # accept the external repo's change
-git merge --abort # to cancel the entire merging process (maybe it's easier to to this manually)
-```
-Then commit and push as usual.
-
-Note: There must be a better way. Fork?
-
-
-## Steps to be taken by overall challenge hosts (Rohit, etc)
-
-
