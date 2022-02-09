@@ -65,7 +65,7 @@ Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedo
 3. Now go to `github/host_config.json` in your repo, and update the 3 values in there:
    - `evalai_user_auth_token` - Go to [profile page](https://eval.ai/web/profile) after logging in and click on `Get your Auth Token` to copy your auth token.
    - `host_team_pk` - This should be "1744" -- which is the team ID for "Ego4D" team. You should be able to see it on [host team page](https://eval.ai/web/challenge-host-teams) if you have been added. If not, contact admins to add you.
-   - `evalai_host_url` - Use https://eval.ai for production server and https://staging.eval.ai for staging server.
+   - `evalai_host_url` - Set to https://eval.ai
 
 
 ### Step 3: Make changes for your benchmark
@@ -74,22 +74,74 @@ Edit the list of files above, tailoring it to your benchmark. Please stick to th
 - Update the `title`, `short_description`, `description.html`. Please use Ego4D "branding". The name should be "Ego4D: <title of your challenge>"
 - Update the `evaluation_details.html`. It should contain the metrics that will appear on the leaderboard, and which metric will be used for ranking the submissions.
 - Please do not change the terms and conditions or the logo.
-- Update `submission_guidelines.html`, `leaderboard_description`, `evaluation_script`
+- Update `submission_guidelines.html` and `leaderboard_description`
 - Update the metric names, descriptions, which will be used to sort
 - Please update `templates/challenge_test_phase_description.html`, `test_annotation_file`
 
-
 After pushing, check the actions tab on github. If everything went well, the build would have succeeded. A successful build = changes show up on EvalAI challenge website.
 
-### Step 4: Testing and Development
-EvalAI docs: https://evalai.readthedocs.io/en/latest/
+### Step 4: Writing the evaluation script
+Modify the `evaluate()` function in `evaluation_script/main.py` according to the benchmark definition. The evaluate function looks like this:
+```
+def evaluate(test_annotation_file, user_annotation_file, phase_codename, **kwargs):
+    ...
+```
+
+`test_annotation_file` is the path to the file uploaded in Step 3, while `user_annotation_file` is the path to the file uploaded by the user for evaluation. Since we have only one test phase, `phase_codename` will always be `test` and can be ignored. The function must read these files, calculate relevant metrics and then return a dictionary of metrics as follows:
+```
+output = {}
+output['result'] = [
+   {
+       'test_split': {
+           'Metric1': 123,
+           'Metric2': 123,
+           'Metric3': 123,
+           'Total': 123,
+       }
+   }
+]
+```
+
+For example, a simple version of the `main.py` script could look like this.
+```
+import numpy as np
+import json 
+
+def calculate_top1(scores, labels):
+   # calculate top1 accuracy
+   ...
+   return acc_top1
+
+def calculate_top5(scores, labels):
+   # calculate top5 accuracy
+   ...
+   return acc_top5
+
+def evaluate(test_annotation_file, user_annotation_file, phase_codename, **kwargs):
+   gt_data = json.load(open(test_annotation_file, 'r'))
+   pred_data = json.load(open(user_annotation_file, 'r'))
+
+   output = {}
+   output['result'] = [
+      {
+          'test_split': {
+              'accuracy_top1': calculate_top1(pred_data['scores'], gt_data['labels']),
+              'accuracy_top5': calculate_top5(pred_data['scores'], gt_data['labels']),,
+          }
+      }
+   ]
+   return output
+```
+
+Note: If your evaluation pipeline requires extra packages to be installed via pip, these can be specified in `evaluation_script/__init__.py` before importing `main`.
+More info: https://evalai.readthedocs.io/en/latest/evaluation_scripts.html
 
 ### Step 5: Test evaluation script locally:
 Link files in your evaluation directory into the local challenge dir
 ```
 ln -s $PWD/evaluation_script/* challenge_data/challenge_1/
 ```
-Run worker. The user submission is submission.json in the root dir. This is exactly the same job that will be run on EvalAI worker nodes so if it succeeds here, it should run there as well.
+Run worker. The user submission is `submission.json` in the root dir. This is exactly the same job that will be run on EvalAI worker nodes so if it succeeds here, it should run there as well.
 ```
 python -m worker.run
 ```
@@ -111,3 +163,8 @@ $ git push origin challenge
 ```
 
 You challenge will be rebuilt and updated with the latest updates on the base repo.
+
+
+### More info
+EvalAI docs: https://evalai.readthedocs.io/en/latest/
+
