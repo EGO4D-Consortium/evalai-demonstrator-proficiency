@@ -36,24 +36,20 @@ EvalAI website
 
 ### Step 1: Create challenge repo
 
+Create a private new repo for your challenge in the `https://github.com/EGO4D-Consortium` organization. Use the `evalai-base` template we have created. The name of the repo should be `evalai-<your challenge short name>-challenge`. For example, the "Short-Term Anticipation (STA)" challenge will name their repo `evalai-sta-challenge`. Lets call the name of this repo as `$CHALLENGE_REPO_NAME`.
 
-1. Create a new **empty** repo for your challenge in the `https://github.com/EGO4D-Consortium` organization. The name of the repo should be `evalai-<your challenge short name>-challenge`. For example, the "Short-Term Anticipation (STA)" challenge will name their repo `evalai-sta-challenge`. Lets call the name of this repo as `$CHALLENGE_REPO_NAME`.
-
-2. Next, clone the `evalai-base` repo into your repo. [This repo](https://github.com/EGO4D-Consortium/evalai-base) is an Ego4D specific template (of an existing [EvalAI template](https://github.com/Cloud-CV/EvalAI-Starters)) and contains common configuration details and challenge html templates that every challenge repo should have for consistency. Each challenge repo should ensure that they are synced with this base repo before pushing changes. All the centralized changes to the templates will be pushed to the base repo, hence your challenge repo will have to stay in-sync with the upstream repo. The name of the branch **MUST** be `challenge`. This is how you should set it up:
+[This repo](https://github.com/EGO4D-Consortium/evalai-base) is an Ego4D specific template (of an existing [EvalAI template](https://github.com/Cloud-CV/EvalAI-Starters)) and contains common configuration details and challenge html templates that every challenge repo should have for consistency. Each challenge repo should ensure that they are synced with this base repo before pushing changes. All the centralized changes to the templates will be pushed to the base repo, hence your challenge repo will have to stay in-sync with the upstream repo. The name of the branch **MUST** be `challenge`. This is how you should set it up:
 
 ```
 $ export CHALLENGE_REPO_NAME="evalai-sta-challenge"
 $ git clone git@github.com:EGO4D-Consortium/evalai-base.git $CHALLENGE_REPO_NAME
 $ cd $CHALLENGE_REPO_NAME
 $ # now change the remote "origin" to your new repo, and keep the base repo as "upstream"
-$ git remote rm origin
-$ git remote add origin git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git
 $ git remote add upstream git@github.com:EGO4D-Consortium/evalai-base.git
 $ git push --set-upstream origin challenge
 ```
 
 And you are all set! This repo will have all the good stuff from the base repo, and has base set as upstream, so whenever things change upstream, you will be able to fetch and merge in changes (see Step N below).
-
 
 
 ### Step 2: Setup EvalAI <--> github access
