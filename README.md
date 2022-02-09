@@ -42,9 +42,9 @@ Create a private new repo for your challenge in the `https://github.com/EGO4D-Co
 
 ```
 $ export CHALLENGE_REPO_NAME="evalai-sta-challenge"
-$ git clone git@github.com:EGO4D-Consortium/evalai-base.git $CHALLENGE_REPO_NAME
+$ git clone git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git
 $ cd $CHALLENGE_REPO_NAME
-$ # now change the remote "origin" to your new repo, and keep the base repo as "upstream"
+$ # now add the base repo as "upstream"
 $ git remote add upstream git@github.com:EGO4D-Consortium/evalai-base.git
 $ git push --set-upstream origin challenge
 ```
