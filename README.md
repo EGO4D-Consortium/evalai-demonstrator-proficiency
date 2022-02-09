@@ -52,7 +52,7 @@ $ git remote add upstream git@github.com:EGO4D-Consortium/evalai-base.git
 $ git push --set-upstream origin challenge
 ```
 
-And you are all set! This repo will have all the good stuff from the base repo, and has base set as upstream, so whenever things change upstream, you will be able to fetch and merge in changes, as follows:
+And you are all set! This repo will have all the good stuff from the base repo, and has base set as upstream, so whenever things change upstream, you will be able to fetch and merge in changes (see Step N below).
 
 
 
