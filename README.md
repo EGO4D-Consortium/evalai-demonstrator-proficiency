@@ -6,7 +6,7 @@ Glossary:
 
 A repo and associated EvalAI challenge page will be created (and pre-configured) for each benchmark. Each POC needs to modify and push a series of challenge specific files.
 
-```
+```bash
 ├── annotations                                 # Contains the annotations for Dataset splits
 │   └── test_annotations_testsplit.json         # Annotations for test split
 ├── challenge_config.yaml                       # Configuration file to define challenge setup
@@ -40,7 +40,7 @@ EvalAI website
 
 2. Next, clone the `evalai-base` repo into your repo. [This repo](https://github.com/EGO4D-Consortium/evalai-base) is an Ego4D specific template (of an existing [EvalAI template](https://github.com/Cloud-CV/EvalAI-Starters)) and contains common configuration details and challenge html templates that every challenge repo should have for consistency. Each challenge repo should ensure that they are synced with this base repo before pushing changes. All the centralized changes to the templates will be pushed to the base repo, hence your challenge repo will have to stay in-sync with the upstream repo. The name of the branch **MUST** be `challenge`. This is how you should set it up:
 
-```
+```bash
 $ export CHALLENGE_REPO_NAME="evalai-sta-challenge"
 $ git clone git@github.com:EGO4D-Consortium/evalai-base.git $CHALLENGE_REPO_NAME
 $ cd $CHALLENGE_REPO_NAME
@@ -86,7 +86,7 @@ def evaluate(test_annotation_file, user_annotation_file, phase_codename, **kwarg
 ```
 
 `test_annotation_file` is the path to the file uploaded in Step 3, while `user_annotation_file` is the path to the file uploaded by the user for evaluation. Since we have only one test phase, `phase_codename` will always be `test` and can be ignored. The function must read these files, calculate relevant metrics and then return a dictionary of metrics as follows:
-```
+```python
 output = {}
 output['result'] = [
    {
@@ -101,9 +101,9 @@ output['result'] = [
 ```
 
 For example, a simple version of the `main.py` script could look like this.
-```
+```python
 import numpy as np
-import json 
+import json
 
 def calculate_top1(scores, labels):
    # calculate top1 accuracy
@@ -148,7 +148,7 @@ python -m worker.run
 
 This will be required to be done whenever the admins change something like challenge start/end dates, high-level templates, terms and conditions etc. Those fields are supposed to be only controlled by the base repo and you should not edit them yourself (or risk running into merge conflicts!!) Here is how you can update your repo to the base repo when asked:
 
-```
+```bash
 $ git remote -v  # Check your remotes are setup correctly; it should look something like this
 origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (fetch)
 origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (push)
