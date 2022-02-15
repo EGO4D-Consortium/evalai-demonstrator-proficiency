@@ -7,8 +7,6 @@ Glossary:
 A repo and associated EvalAI challenge page will be created (and pre-configured) for each benchmark. Each POC needs to modify and push a series of challenge specific files.
 
 ```bash
-├── annotations                                 # Contains the annotations for Dataset splits
-│   └── test_annotations_testsplit.json         # Annotations for test split
 ├── challenge_config.yaml                       # Configuration file to define challenge setup
 ├── evaluation_script                           # Contains the evaluation script
 │   ├── __init__.py                             # Imports the modules that involve annotations loading etc
@@ -22,8 +20,6 @@ EvalAI website
     ├── submission_guidelines.html              # Contains information about how to make submissions to the challenge
     └── terms_and_conditions.html               # Contains terms and conditions related to the challenge
 ```
-
-`Annotations/`: This folder should contain the ground truth annotations for the test set. `evaluation_script/main.py` will read this json and compare it to the user submitted json to generate scores
 
 `Challenge_config.yaml`: Information about what metrics to display will be shown here. The main section here is the leaderboard which needs to be modified. Only change the keys specified in the comments. The other config has already been done (e.g. start/end date of the challenge, data splits, leaderboard visibility…)
 
@@ -74,7 +70,7 @@ Edit the list of files above, tailoring it to your benchmark. Please stick to th
 - Please do not change the terms and conditions or the logo.
 - Update `submission_guidelines.html` and `leaderboard_description`
 - Update the metric names, descriptions, which will be used to sort
-- Please update `templates/challenge_test_phase_description.html`, `test_annotation_file`
+- Please update `templates/challenge_test_phase_description.html`
 
 After pushing, check the actions tab on github. If everything went well, the build would have succeeded. A successful build = changes show up on EvalAI challenge website.
 
@@ -85,7 +81,7 @@ def evaluate(test_annotation_file, user_annotation_file, phase_codename, **kwarg
     ...
 ```
 
-`test_annotation_file` is the path to the file uploaded in Step 3, while `user_annotation_file` is the path to the file uploaded by the user for evaluation. Since we have only one test phase, `phase_codename` will always be `test` and can be ignored. The function must read these files, calculate relevant metrics and then return a dictionary of metrics as follows:
+`test_annotation_file` is the path to the ground truth test annotations, while `user_annotation_file` is the path to the file uploaded by the user for evaluation. Since we have only one test phase, `phase_codename` will always be `test` and can be ignored. The function must read these files, calculate relevant metrics and then return a dictionary of metrics as follows:
 ```python
 output = {}
 output['result'] = [
@@ -135,14 +131,49 @@ Note: If your evaluation pipeline requires extra packages to be installed via pi
 More info: https://evalai.readthedocs.io/en/latest/evaluation_scripts.html
 
 ### Step 5: Test evaluation script locally:
+To test locally, place the ground truth annotations into the annotations directory `annotations/test_annotations_testsplit.json`. Do **NOT** push this file into the github repo. You will upload it via a CLI tool later. Also place a `submission.json` in the root directory. This is to represent the user generated submission. 
+
 Link files in your evaluation directory into the local challenge dir
 ```
 ln -s $PWD/evaluation_script/* challenge_data/challenge_1/
 ```
-Run worker. The user submission is `submission.json` in the root dir. This is exactly the same job that will be run on EvalAI worker nodes so if it succeeds here, it should run there as well.
+This is exactly the same job that will be run on EvalAI worker nodes so if it succeeds here, it should run there as well.
 ```
 python -m worker.run
 ```
+
+### Step 6: Upload GT annotations using the EvalAI CLI.
+Install and set up the CLI. The `auth_token` is the same as the one in `github/host_config.json`.
+```
+$ pip install evalai
+$ evalai set_token <auth_token>
+```
+
+Find your challenge ID and test phase ID.
+```
+$ evalai challenges --host
+
++------+------------------------------------------------+--------------------------------------------------+---------------------+----------------------+----------------------+
+|  ID  |                     Title                      |                Short Description                 |       Creator       |      Start Date      |       End Date       |
++------+------------------------------------------------+--------------------------------------------------+---------------------+----------------------+----------------------+
+| 1598 | Ego4D: Long term action anticipation challenge | Ego4D challenge on Long term action anticipation |        Ego4D        | 03/01/22 04:00:00 PM | 05/31/22 04:59:59 PM |
++------+------------------------------------------------+--------------------------------------------------+---------------------+----------------------+----------------------+
+
+$ evalai challenge 1598 phases
+
++----------+------------+--------------+------------------------------------+
+| Phase ID | Phase Name | Challenge ID |            Description             |
++----------+------------+--------------+------------------------------------+
+|   3161   | Test Phase |     1598     | Test phase for the LTA challenge   |
++----------+------------+--------------+------------------------------------+
+```
+
+Upload test annotations for this phase. This is the file that will be passed to your `evaluate()` function in Step 4.
+```
+$ evalai challenge 1598 phase 3161 submit --file test_annotations_testsplit.json --annotation
+```
+
+NOTE: Please no not upload the test annotations directly to github. Use the CLI tool to ensure that they only exist on the EvalAI servers.
 
 ### Step N: Sync-ing your repo to the upstream
 
