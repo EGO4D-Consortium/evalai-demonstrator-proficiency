@@ -175,6 +175,10 @@ $ evalai challenge 1598 phase 3161 submit --file test_annotations_testsplit.json
 
 NOTE: Please no not upload the test annotations directly to github. Use the CLI tool to ensure that they only exist on the EvalAI servers.
 
+### Step 7: Make a baseline submission
+To test your setup and report your baseline results, please make a submission using your baseline code to generate a submission JSON and upload it through the EvalAI system. Once submitted, make it public on the leaderboard, and mark it as a "baseline." It will show up on the leadboard with a "B" to denote that this is the official baseline ([example here](https://eval.ai/web/challenges/challenge-page/802/leaderboard/2195)). Please make sure to submit a baseline, as without it, no participant will be eligible for prizes (as per our rules, they must outperform the baseline on the "primary" metric to be eligible).
+    
+    
 ### Step N: Sync-ing your repo to the upstream
 
 This will be required to be done whenever the admins change something like challenge start/end dates, high-level templates, terms and conditions etc. Those fields are supposed to be only controlled by the base repo and you should not edit them yourself (or risk running into merge conflicts!!) Here is how you can update your repo to the base repo when asked:
