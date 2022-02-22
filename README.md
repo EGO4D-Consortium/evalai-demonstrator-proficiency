@@ -58,7 +58,7 @@ Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedo
 2. For the your repo, go to Settings, select "Secrets" from the sidebar, click on "Actions", create a "New Repository Secret". Make a token with name "AUTH_TOKEN", and copy your github personal access token into the text box.
 3. Now go to `github/host_config.json` in your repo, and update the 3 values in there:
    - `evalai_user_auth_token` - Go to [profile page](https://eval.ai/web/profile) after logging in and click on `Get your Auth Token` to copy your auth token.
-   - `host_team_pk` - This should be "1744" -- which is the team ID for "Ego4D" team. You should be able to see it on [host team page](https://eval.ai/web/challenge-host-teams) if you have been added. If not, contact admins to add you. You would also be added to the "Ego4D" participant team, as that will be used for making basline submissions to the challenge.
+   - `host_team_pk` - This should be "1744" -- which is the team ID for "Ego4D" team. You should be able to see it on [host team page](https://eval.ai/web/challenge-host-teams) if you have been added. If not, contact admins to add you. 
    - `evalai_host_url` - Set to https://eval.ai
 
 
