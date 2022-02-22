@@ -58,7 +58,7 @@ Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedo
 2. For the your repo, go to Settings, select "Secrets" from the sidebar, click on "Actions", create a "New Repository Secret". Make a token with name "AUTH_TOKEN", and copy your github personal access token into the text box.
 3. Now go to `github/host_config.json` in your repo, and update the 3 values in there:
    - `evalai_user_auth_token` - Go to [profile page](https://eval.ai/web/profile) after logging in and click on `Get your Auth Token` to copy your auth token.
-   - `host_team_pk` - This should be "1744" -- which is the team ID for "Ego4D" team. You should be able to see it on [host team page](https://eval.ai/web/challenge-host-teams) if you have been added. If not, contact admins to add you.
+   - `host_team_pk` - This should be "1744" -- which is the team ID for "Ego4D" team. You should be able to see it on [host team page](https://eval.ai/web/challenge-host-teams) if you have been added. If not, contact admins to add you. You would also be added to the "Ego4D" participant team, as that will be used for making basline submissions to the challenge.
    - `evalai_host_url` - Set to https://eval.ai
 
 
@@ -176,7 +176,7 @@ $ evalai challenge 1598 phase 3161 submit --file test_annotations_testsplit.json
 NOTE: Please no not upload the test annotations directly to github. Use the CLI tool to ensure that they only exist on the EvalAI servers.
 
 ### Step 7: Make a baseline submission
-To test your setup and report your baseline results, please make a submission using your baseline code to generate a submission JSON and upload it through the EvalAI system. Once submitted, make it public on the leaderboard, and mark it as a "baseline." It will show up on the leadboard with a "B" to denote that this is the official baseline ([example here](https://eval.ai/web/challenges/challenge-page/802/leaderboard/2195)). Please make sure to submit a baseline, as without it, no participant will be eligible for prizes (as per our rules, they must outperform the baseline on the "primary" metric to be eligible).
+To test your setup and report your baseline results, we need to make a submission using your baseline code to generate a submission JSON and upload it through the EvalAI system. Once submitted, make it public on the leaderboard, and mark it as a "baseline" by going to your submissions. It will show up on the leadboard with a "B" to denote that this is the official baseline ([example here](https://eval.ai/web/challenges/challenge-page/802/leaderboard/2195)). Please make sure to submit a baseline, as without it, no participant will be eligible for prizes (as per our rules, they must outperform the baseline on the "primary" metric to be eligible).
     
     
 ### Step N: Sync-ing your repo to the upstream
