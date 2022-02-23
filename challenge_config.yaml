@@ -2,7 +2,7 @@
 # - title, short_description, leaderboard_description: fill with respective benchmark details
 # - leaderboard: replace with relevant benchmark metrics. See LTA challenge repo for examples.
 
-title: "Ego4D: <POC: your challenge name>"
+title: "Ego4D <POC, your challenge name>"  # No special characters like ":" allowed
 short_description: "Ego4D challenge on <POC: your challenge description>"
 description: templates/description.html
 evaluation_details: templates/evaluation_details.html
