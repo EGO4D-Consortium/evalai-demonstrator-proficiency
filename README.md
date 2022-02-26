@@ -170,7 +170,7 @@ $ evalai challenge 1598 phases
 
 Upload test annotations for this phase. This is the file that will be passed to your `evaluate()` function in Step 4.
 ```
-$ evalai challenge 1598 phase 3161 submit --file test_annotations_testsplit.json --annotation
+$ evalai challenge 1598 phase 3161 submit --file test_annotations_testsplit.json --annotation --large
 ```
 
 NOTE: Please no not upload the test annotations directly to github. Use the CLI tool to ensure that they only exist on the EvalAI servers.
