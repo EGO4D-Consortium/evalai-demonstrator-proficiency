@@ -134,23 +134,23 @@ More info: https://evalai.readthedocs.io/en/latest/evaluation_scripts.html
 To test locally, place the ground truth annotations into the annotations directory `annotations/test_annotations_testsplit.json`. Do **NOT** push this file into the github repo. You will upload it via a CLI tool later. Also place a `submission.json` in the root directory. This is to represent the user generated submission. 
 
 Link files in your evaluation directory into the local challenge dir
-```
+```bash
 ln -s $PWD/evaluation_script/* challenge_data/challenge_1/
 ```
 This is exactly the same job that will be run on EvalAI worker nodes so if it succeeds here, it should run there as well.
-```
+```bash
 python -m worker.run
 ```
 
 ### Step 6: Upload GT annotations using the EvalAI CLI.
 Install and set up the CLI. The `auth_token` is the same as the one in `github/host_config.json`.
-```
+```bash
 $ pip install evalai
 $ evalai set_token <auth_token>
 ```
 
 Find your challenge ID and test phase ID.
-```
+```bash
 $ evalai challenges --host
 
 +------+------------------------------------------------+--------------------------------------------------+---------------------+----------------------+----------------------+
@@ -169,11 +169,12 @@ $ evalai challenge 1598 phases
 ```
 
 Upload test annotations for this phase. This is the file that will be passed to your `evaluate()` function in Step 4.
-```
+```bash
 $ evalai challenge 1598 phase 3161 submit --file test_annotations_testsplit.json --annotation --large
 ```
 
 NOTE: Please no not upload the test annotations directly to github. Use the CLI tool to ensure that they only exist on the EvalAI servers.
+NOTE 2: If you update your challenge, you might have to upload these annotations again through the CLI.
 
 ### Step 7: Make a baseline submission
 To test your setup and report your baseline results, we need to make a submission using your baseline code to generate a submission JSON and upload it through the EvalAI system. Once submitted, make it public on the leaderboard, and mark it as a "baseline" by going to your submissions. It will show up on the leadboard with a "B" to denote that this is the official baseline ([example here](https://eval.ai/web/challenges/challenge-page/802/leaderboard/2195)). Please make sure to submit a baseline, as without it, no participant will be eligible for prizes (as per our rules, they must outperform the baseline on the "primary" metric to be eligible). For debugging, you might want to increase the `max_submissions_per_day` field in the `challenge_config.yaml` so you can make multiple submissions until things work. Do remember to set it back to the default after.
