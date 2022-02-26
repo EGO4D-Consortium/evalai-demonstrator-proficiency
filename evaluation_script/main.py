@@ -76,6 +76,6 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
             },
         ]
         # To display the results in the result file
-        output["submission_result"] = output["result"][0]
+        output["submission_result"] = output["result"][0]['test_split']
         print("Completed evaluation for Test Phase")
     return output
