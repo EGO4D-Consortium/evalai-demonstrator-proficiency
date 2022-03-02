@@ -54,9 +54,11 @@ And you are all set! This repo will have all the good stuff from the base repo, 
 Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedocs.io/en/latest/host_challenge.html) to allow EvalAI to read from this repo. I recap them here:
 
 0. Create an Ego4D account, and ask admins to add you to the "Ego4D" team. You might not be able to create challenges until you are added to this team.
-1. Create a [github personal acccess token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and copy it in clipboard.
-2. For the your repo, go to Settings, select "Secrets" from the sidebar, click on "Actions", create a "New Repository Secret". Make a token with name "AUTH_TOKEN", and copy your github personal access token into the text box.
-3. Now go to `github/host_config.json` in your repo, and update the 3 values in there:
+1. Create a [github personal acccess token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and copy it in clipboard. These are the permissions you need to grant:
+   ![image](https://user-images.githubusercontent.com/1893429/156271507-1ad220a5-d7d1-4445-85f9-93a930dfd353.png)
+
+3. For the your repo, go to Settings, select "Secrets" from the sidebar, click on "Actions", create a "New Repository Secret". Make a token with name "AUTH_TOKEN", and copy your github personal access token into the text box.
+4. Now go to `github/host_config.json` in your repo, and update the 3 values in there:
    - `evalai_user_auth_token` - Go to [profile page](https://eval.ai/web/profile) after logging in and click on `Get your Auth Token` to copy your auth token.
    - `host_team_pk` - This should be "1744" -- which is the team ID for "Ego4D" team. You should be able to see it on [host team page](https://eval.ai/web/challenge-host-teams) if you have been added. If not, contact admins to add you. 
    - `evalai_host_url` - Set to https://eval.ai
