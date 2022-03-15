@@ -185,6 +185,20 @@ To test your setup and report your baseline results, we need to make a submissio
     
 ### Step N: Sync-ing your repo to the upstream
 
+The rebase solution (below) was cumbersome, so I'd recommend doing a merge instead:
+
+```bash
+$ git remote -v  # Check your remotes are setup correctly; it should look something like this
+origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (fetch)
+origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (push)
+upstream	git@github.com:EGO4D-Consortium/evalai-base.git (fetch)
+upstream	git@github.com:EGO4D-Consortium/evalai-base.git (push)
+$ git pull upstream challenge
+$ # Ideally there shouldn't be any merge conflicts. If there are, fix them (you likely changed something that should only be changed in base)
+$ git push origin challenge
+```
+    
+<del>
 This will be required to be done whenever the admins change something like challenge start/end dates, high-level templates, terms and conditions etc. Those fields are supposed to be only controlled by the base repo and you should not edit them yourself (or risk running into merge conflicts!!) Here is how you can update your repo to the base repo when asked:
 
 ```bash
@@ -198,6 +212,7 @@ $ git rebase upstream/challenge
 $ # Ideally there shouldn't be any merge conflicts. If there are, fix them (you likely changed something that should only be changed in base)
 $ git push origin challenge
 ```
+</del>
 
 You challenge will be rebuilt and updated with the latest updates on the base repo.
 
