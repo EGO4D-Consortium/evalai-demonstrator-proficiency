@@ -1,6 +1,7 @@
 Glossary:
 - POC: Person of contact. The person setting up and hosting a specific challenge.
 - Admin: Currently Tushar Nagarajan or Rohit Girdhar. We manage the main evalai-base repo which will be forked for all challenges. This repo would contain the "common" information like terms, logos, start/end dates etc.
+- EvalAI Admin: Currently [Ram Ramrakhya](https://ram81.github.io/) and [Rishabh Jain](https://rishabhjain.xyz/)
 
 # Challenge setup
 
@@ -185,7 +186,7 @@ To test your setup and report your baseline results, we need to make a submissio
     
 ### Step N: Sync-ing your repo to the upstream
 
-The rebase solution (below) was cumbersome, so I'd recommend doing a merge instead:
+This will be required to be done whenever the admins change something like challenge start/end dates, high-level templates, terms and conditions etc. Those fields are supposed to be only controlled by the base repo and you should not edit them yourself (or risk running into merge conflicts!!) Here is how you can update your repo to the base repo when asked. The older rebase solution (below) was cumbersome, so I'd recommend doing a merge instead:
 
 ```bash
 $ git remote -v  # Check your remotes are setup correctly; it should look something like this
@@ -199,8 +200,6 @@ $ git push origin challenge
 ```
     
 <del>
-This will be required to be done whenever the admins change something like challenge start/end dates, high-level templates, terms and conditions etc. Those fields are supposed to be only controlled by the base repo and you should not edit them yourself (or risk running into merge conflicts!!) Here is how you can update your repo to the base repo when asked:
-
 ```bash
 $ git remote -v  # Check your remotes are setup correctly; it should look something like this
 origin	git@github.com:EGO4D-Consortium/${CHALLENGE_REPO_NAME}.git (fetch)
@@ -215,6 +214,16 @@ $ git push origin challenge
 </del>
 
 You challenge will be rebuilt and updated with the latest updates on the base repo.
+    
+    
+### Step N+1: Sign-up for notifications on the discuss channel for your challenge
+Once the challenges are made public, the EvalAI admins will set up a discussion forum for your challenge. As the challenge POC, please subscribe to notifications on that forum so you are notified whenever somebody posts a question. This is important to ensure the community has a way to communicate with the challenge hosts, resolve issues etc. The steps are quite straightforward:
+    
+1. Go to the "discuss" page on your challenge. It will lead you to a link somethine like this: https://evalai-forum.cloudcv.org/c/ego4d-object-state-change-detection/61
+2. Create an account on that discuss page. Unfortunately EvalAI accounts don't work there. I personally just linked it to my github account (it allows you to login via github), but feel free to use whatever you like.
+3. Once you are logged in, open your challenge's discussion page again, and click the "notification bell icon" and select "watching" so you get notified for all the posts in your challenge.
+    <img width="1165" alt="image" src="https://user-images.githubusercontent.com/1893429/158888901-e3ab9341-92aa-4fb3-a601-9e5664335689.png">
+4. After that please do try to respond to all the questions in a timely manner so we can ensure our challenge participants have a positive experience :)
 
 
 ### More info
