@@ -54,7 +54,7 @@ And you are all set! This repo will have all the good stuff from the base repo, 
 ### Step 2: Setup EvalAI <--> github access
 Then follow steps 2, 3, 4 from the [EvalAI setup guide](https://evalai.readthedocs.io/en/latest/host_challenge.html) to allow EvalAI to read from this repo. I recap them here:
 
-0. Create an Ego4D account, and ask admins to add you to the "Ego4D" team. You might not be able to create challenges until you are added to this team.
+0. Create an EvalAI account, and ask admins to add you to the "Ego4D" team. You might not be able to create challenges until you are added to this team.
 1. Create a [github personal acccess token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and copy it in clipboard. These are the permissions you need to grant:
    ![image](https://user-images.githubusercontent.com/1893429/156271507-1ad220a5-d7d1-4445-85f9-93a930dfd353.png)
 
